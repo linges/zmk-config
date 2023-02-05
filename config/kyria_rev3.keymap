@@ -7,8 +7,8 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
-&left_encoder { resolution = <1>; };
-&right_encoder { resolution = <1>; };
+&left_encoder { resolution = <2>; };
+&right_encoder { resolution = <2>; };
 
 / {
 	keymap {
@@ -27,7 +27,7 @@
 	                 &kp LGUI &kp DEL &kp RET &kp SPACE &kp ESC        &kp RET  &kp SPACE  &kp TAB &kp BSPC &kp RALT
 			>;
 
-			sensor-bindings = <&inc_dec_kp A B &inc_dec_kp PG_UP PG_DN>;
+			sensor-bindings = <&inc_dec_kp PG_UP PG_DN>;
 		};
 	};
 };
