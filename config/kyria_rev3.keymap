@@ -56,7 +56,7 @@
 	                 &kp LGUI &kp DEL &lt NAV RET &lt HERBST SPACE &lt NUM ESC        &kp RET  &mt LSHFT SPACE &kp BSPC  &kp TAB &kp RALT
 			>;
 
-			sensor-bindings = <&inc_dec_kp UP DOWN>;
+			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
 		};
 
 		herbst_layer {
@@ -67,7 +67,7 @@
                        &trans &trans &trans &trans &trans                        &trans &trans &trans &trans &trans
 			>;
 
-			sensor-bindings = <&inc_dec_kp PG_UP PG_DN>;
+			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
 		};
 
 		num_layer {
@@ -78,7 +78,7 @@
 	                  &trans &trans &trans &trans &trans                        &trans &trans &trans &trans &trans
 			>;
 
-			sensor-bindings = <&inc_dec_kp PG_UP PG_DN>;
+			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
 		};
 
 		nav_layer {
@@ -89,7 +89,7 @@
 	                  &trans &trans &trans &trans &trans                        &trans &trans &trans &trans &trans
 			>;
 
-			sensor-bindings = <&inc_dec_kp PG_UP PG_DN>;
+			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
 		};
 	};
 };
