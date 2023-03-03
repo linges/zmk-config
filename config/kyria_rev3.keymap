@@ -61,9 +61,9 @@
 
 		herbst_layer {
 			bindings = <
-	&bt BT_SEL 0  HLHOLD(F5) HLHOLD(F4) HLHOLD(F3) HLHOLD(F2) HLHOLD(F1)               &kp LA(RET) &kp LA(U) HLHOLD(UP) &kp LA(SPACE) &kp LA(F) &trans
-	&bt BT_SEL 1 HLHOLD(N5) HLHOLD(N4) HLHOLD(N3) HLHOLD(N2) HLHOLD(N1)                &trans HLHOLD(LEFT) HLHOLD(DOWN) HLHOLD(RIGHT) &trans &trans
-    &bt BT_SEL 2 &trans &trans &trans &trans &trans HLHOLD(Y) HLHOLD(O)                      &trans &trans       &kp LA(M)    &kp LA(COMMA) &trans &trans &trans &trans
+	&bt BT_SEL 0  HLHOLD(F5) HLHOLD(F4) HLHOLD(F3) HLHOLD(F2) HLHOLD(F1)               &kp LA(RET) &kp LA(U) HLHOLD(UP) &kp LA(SPACE) &kp LA(F) &kp LA(P)
+	&bt BT_SEL 1 HLHOLD(N5) HLHOLD(N4) HLHOLD(N3) HLHOLD(N2) HLHOLD(N1)                &kp LA(LS(C)) HLHOLD(LEFT) HLHOLD(DOWN) HLHOLD(RIGHT) &kp LA(LC(LEFT)) &kp LA(LC(RIGHT))
+    &bt BT_SEL 2 &trans &trans &trans &trans &trans HLHOLD(Y) HLHOLD(O)               &trans &trans &kp LA(R) &kp LA(M) &kp LA(COMMA)  &trans &kp LA(LC(UP)) &kp LA(LC(DOWN))
                        &trans &trans &trans &trans &trans                        &trans &trans &trans &trans &trans
 			>;
 
