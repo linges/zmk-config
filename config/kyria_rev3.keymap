@@ -56,11 +56,91 @@
 	                 //&kp LGUI &kp DEL &kp RET &kp SPACE &kp ESC        &kp RET  &kp SPACE  &kp TAB &kp BSPC &kp RALT
 			//>;
 
+    #define _LEFT__ &kp LEFT
+    #define __UP___ &kp UP
+    #define _DOWN__ &kp DOWN
+    #define _RIGHT_ &kp RIGHT
+
+    #define _SPACE_ &lt HERBST SPACE
+    #define __TAB__ &kp TAB
+    #define _ENTER_ &lt NUM RET
+    #define _BKSPC_ &kp BACKSPACE
+    #define __DEL__ &kp DEL
+    #define __ESC__ &lt NAV ESC
+
+    #define ___A___ &hm LGUI A
+    #define ___B___ &kp B
+    #define ___C___ &kp C
+    #define ___D___ &kp D
+    #define ___E___ &hm LSHFT E
+    #define ___F___ &kp F
+    #define ___G___ &kp G
+    #define ___H___ &kp H
+    #define ___I___ &hm RALT I
+    #define ___J___ &kp J
+    #define ___K___ &kp K
+    #define ___L___ &kp L
+    #define ___M___ &kp M
+    #define ___N___ &hm RCTRL N
+    #define ___O___ &hm RGUI  O
+    #define ___P___ &kp P
+    #define ___Q___ &kp P
+    #define ___R___ &hm LALT R
+    #define ___S___ &hm LSHFT S
+    #define ___T___ &hm LCTRL T
+    #define ___U___ &kp U
+    #define ___V___ &kp V
+    #define ___W___ &kp W
+    #define ___X___ &kp X
+    #define ___Y___ &kp Y
+    #define ___Z___ &kp Z
+
+    #define _COMMA_ &kp COMMA
+    #define _MINUS_ &morph_minus_plus
+    #define _COLON_ &morph_colon_pipe
+    #define _GRAVE_ &morph_grave_equal
+    #define __DOT__ &kp DOT
+    #define _SLASH_ &kp FSLH
+    #define _SQUOT_ &morph_squote_exclamation
+    #define _DQUOT_ &morph_dquote_question
+    #define _SEMI__ &kp SEMI
+    #define _BSLH__ &kp BSLH
+    #define __SQT__ &kp SQT
+    #define __DEL__ &kp DEL
+
+    #define _LSHFT_ &kp LEFT_SHIFT
+    #define _LCTRL_ &kp LEFT_CONTROL
+    #define _LALT__ &kp LEFT_ALT
+    #define _LCMD__ &kp LEFT_COMMAND
+    #define _RSHFT_ &kp RIGHT_SHIFT
+    #define _RCTRL_ &kp RIGHT_CONTROL
+    #define _RALT__ &kp RIGHT_ALT
+    #define _RCMD__ &kp RIGHT_COMMAND
+
+    #define ___0___ &kp N0
+    #define ___1___ &kp N1
+    #define ___2___ &kp N2
+    #define ___3___ &kp N3
+    #define ___4___ &kp N4
+    #define ___5___ &kp N5
+    #define ___6___ &kp N6
+    #define ___7___ &kp N7
+    #define ___8___ &kp N8
+    #define ___9___ &kp N9
+
+    #define _BTCLR_ &bt BT_CLR
+    #define _BT_00_ &bt BT_SEL 0
+    #define _BT_01_ &bt BT_SEL 1
+    #define _BT_02_ &bt BT_SEL 2
+
+    #define _______ &trans
+
+
 			bindings = <
-	&kp ESC    &kp Q &kp W &kp F &kp P &kp B                                                &kp J &kp L  &kp U     &kp Y   &kp SEMI &kp BSLH
-	&kp TAB    &hm LGUI A &hm LALT R &hm LSHFT S &hm LCTRL T &kp G                     &kp M &hm RCTRL N  &hm LSHFT E &hm RALT I &hm RGUI O    &kp SQT
-    &kp LSHIFT &kp Z &kp X &kp C &kp D &kp V &kp LSHFT &kp LSHFT                   &kp LSHFT &kp LSHFT &kp K &kp H  &kp COMMA &kp DOT &kp FSLH &kp RCTRL
-	                 &kp LGUI &kp DEL &lt NUM RET &lt HERBST SPACE &lt NAV ESC        &kp RET  &mt LSHFT SPACE &kp BSPC  &kp TAB &kp RALT
+	__ESC__ ___Q___ ___W___ ___F___ ___P___ ___B___                                              ___J___ ___L___ ___U___ ___Y___ _SEMI__ _BSLH__
+	__TAB__ ___A___ ___R___ ___S___ ___T___ ___G___                                              ___M___ ___N___ ___E___ ___I___ ___O___ __SQT__
+    _LSHFT_ ___Z___ ___X___ ___C___ ___D___ ___V___ _LSHFT_ _______              _LSHFT_ _LSHFT_ ___K___ ___H___ _COMMA_ __DOT__ _SLASH_ _RCTRL_
+	                        _______ __DEL__ _ENTER_ _SPACE_ __ESC__              _ENTER_ _SPACE_ _BKSPC_ __TAB__ _RALT__
 			>;
 
 			sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
