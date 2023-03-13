@@ -31,6 +31,13 @@
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
+        quit: tap_dance_0 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TAP_DANCE_0";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp LC(C)>, <&kp LA(LS(C))>;
+        };
     };
 
 	keymap {
@@ -51,23 +58,23 @@
 
 			bindings = <
 	&kp ESC    &kp Q &kp W &kp F &kp P &kp B                                                &kp J &kp L  &kp U     &kp Y   &kp SEMI &kp BSLH
-	&kp TAB    &kp A &hm LGUI R &hm LALT S &hm LCTRL T &kp G                        &kp M &hm RCTRL N  &hm LALT E &hm RGUI I   &kp O    &kp SQT
+	&kp TAB    &hm LGUI A &hm LALT R &hm LSHFT S &hm LCTRL T &kp G                     &kp M &hm RCTRL N  &hm LSHFT E &hm RALT I &hm RGUI O    &kp SQT
     &kp LSHIFT &kp Z &kp X &kp C &kp D &kp V &kp LSHFT &kp LSHFT                   &kp LSHFT &kp LSHFT &kp K &kp H  &kp COMMA &kp DOT &kp FSLH &kp RCTRL
-	                 &kp LGUI &kp DEL &lt NAV RET &lt HERBST SPACE &lt NUM ESC        &kp RET  &mt LSHFT SPACE &kp BSPC  &kp TAB &kp RALT
+	                 &kp LGUI &kp DEL &lt NUM RET &lt HERBST SPACE &lt NAV ESC        &kp RET  &mt LSHFT SPACE &kp BSPC  &kp TAB &kp RALT
 			>;
 
-			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+			sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
 		};
 
 		herbst_layer {
 			bindings = <
-	&bt BT_SEL 0  HLHOLD(F5) HLHOLD(F4) HLHOLD(F3) HLHOLD(F2) HLHOLD(F1)               &kp LA(RET) &kp LA(U) HLHOLD(UP) &kp LA(SPACE) &kp LA(F) &kp LA(P)
-	&bt BT_SEL 1 HLHOLD(N5) HLHOLD(N4) HLHOLD(N3) HLHOLD(N2) HLHOLD(N1)                &kp LA(LS(C)) HLHOLD(LEFT) HLHOLD(DOWN) HLHOLD(RIGHT) &kp LA(LC(LEFT)) &kp LA(LC(RIGHT))
-    &bt BT_SEL 2 &trans &trans &trans &trans &trans HLHOLD(Y) HLHOLD(O)               &trans &trans &kp LA(R) &kp LA(M) &kp LA(COMMA)  &trans &kp LA(LC(UP)) &kp LA(LC(DOWN))
-                       &trans &trans &trans &trans &trans                        &trans &trans &trans &trans &trans
+	&bt BT_SEL 0 HLHOLD(F5) HLHOLD(F4) HLHOLD(F3) HLHOLD(F2) HLHOLD(F1)                                   &quit &kp LA(U) HLHOLD(UP) &kp LA(SPACE) &kp LA(F) &kp LA(P)
+	&bt BT_SEL 1 HLHOLD(N5) HLHOLD(N4) HLHOLD(N3) HLHOLD(N2) HLHOLD(N1)                                   &kp LA(RET) HLHOLD(LEFT) HLHOLD(DOWN) HLHOLD(RIGHT) &kp LA(LC(LEFT)) &kp LA(LC(RIGHT))
+    &bt BT_SEL 2 HLHOLD(F12) HLHOLD(F11) HLHOLD(F10) HLHOLD(Y) HLHOLD(Y) HLHOLD(O) &trans   &trans &trans &kp LA(R) &kp LA(M) &kp LA(COMMA)  &trans &kp LA(LC(UP)) &kp LA(LC(DOWN))
+                       &trans &trans &trans &trans &trans                                &trans &trans &trans &trans &trans
 			>;
 
-			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+			sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
 		};
 
 		num_layer {
@@ -78,18 +85,18 @@
 	                  &trans &trans &trans &trans &trans                        &trans &trans &trans &trans &trans
 			>;
 
-			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+			sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
 		};
 
 		nav_layer {
 			bindings = <
 	&trans &trans &trans &trans &trans &trans                                                &trans  &trans &kp UP &trans &trans &trans
-	&trans &trans &trans &trans &trans &trans                                                &trans  &kp RIGHT &kp DOWN &kp RIGHT &trans &trans
+	&trans &trans &trans &trans &trans &trans                                                &trans  &kp LEFT &kp DOWN &kp RIGHT &trans &trans
 //  &trans &trans &trans &trans &trans &trans &trans &trans                        &trans &trans &trans &trans &trans &trans &trans &trans
 	                  &trans &trans &trans &trans &trans                        &trans &trans &trans &trans &trans
 			>;
 
-			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+			sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
 		};
 	};
 };
