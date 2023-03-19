@@ -1,0 +1,23 @@
+morph_parent: morph_parent {
+  compatible = "zmk,behavior-mod-morph";
+  label = "MORPH_PARENT";
+  #binding-cells = <0>;
+  bindings = <&kp LPAR>, <&kp RPAR>;
+  mods = <(MOD_LSFT|MOD_RSFT)>;
+};
+
+morph_bracket: morph_bracket {
+  compatible = "zmk,behavior-mod-morph";
+  label = "MORPH_BRACKET";
+  #binding-cells = <0>;
+  bindings = <&kp LBKT>, <&kp RBKT>;
+  mods = <(MOD_LSFT|MOD_RSFT)>;
+};
+
+morph_brace: morph_brace {
+  compatible = "zmk,behavior-mod-morph";
+  label = "MORPH_BRACE";
+  #binding-cells = <0>;
+  bindings = <&kp LBRC>, <&kp RBRC>;
+  mods = <(MOD_LSFT|MOD_RSFT)>;
+};

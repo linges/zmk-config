@@ -15,6 +15,7 @@
 
 / {
     behaviors {
+        #include "mod_morph.dtsi"
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             label = "HOMEROW_MODS";
@@ -89,18 +90,20 @@
     #define ___Z___ &kp Z
 
     #define _COMMA_ &kp COMMA
-    #define _MINUS_ &morph_minus_plus
-    #define _COLON_ &morph_colon_pipe
-    #define _GRAVE_ &morph_grave_equal
     #define __DOT__ &kp DOT
-    #define _SLASH_ &kp FSLH
-    #define _SQUOT_ &morph_squote_exclamation
-    #define _DQUOT_ &morph_dquote_question
+    #define _MINUS_ &kp MINUS
+    #define _SLASH_ &kp SLASH
+
+
     #define _SEMI__ &kp SEMI
+    #define _EQUAL_ &kp EQUAL
     #define _BSLH__ &kp BSLH
     #define __SQT__ &kp SQT
     #define __DEL__ &kp DEL
-    #define _QMARK_ &kp QMARK
+
+    #define _PARENT &morph_parent
+    #define _BRACKT &morph_bracket
+    #define _BRACE_ &morph_brace
 
     #define _LSHFT_ &kp LEFT_SHIFT
     #define _LCTRL_ &kp LEFT_CONTROL
@@ -158,10 +161,10 @@
     #define NAV     3
 
 			bindings = <
-	__ESC__ ___Q___ ___W___ ___F___ ___P___ ___B___                                              ___J___ ___L___ ___U___ ___Y___ _SEMI__ _BSLH__
-	__TAB__ ___A___ ___R___ ___S___ ___T___ ___G___                                              ___M___ ___N___ ___E___ ___I___ ___O___ __SQT__
-    _LSHFT_ ___Z___ ___X___ ___C___ ___D___ ___V___ _LSHFT_ _______              _LSHFT_ _LSHFT_ ___K___ ___H___ _COMMA_ __DOT__ _SLASH_ _QMARK_
-	                        _______ __DEL__ _ENTER_ _SPACE_ __ESC__              _ENTER_ _SPACE_ _BKSPC_ __TAB__ _RALT__
+	_BRACKT ___Q___ ___W___ ___F___ ___P___ ___B___                                              ___J___ ___L___ ___U___ ___Y___ _MINUS_ __SQT__
+	_PARENT ___A___ ___R___ ___S___ ___T___ ___G___                                              ___M___ ___N___ ___E___ ___I___ ___O___ _SEMI__
+    _BRACE_ ___Z___ ___X___ ___C___ ___D___ ___V___ _LSHFT_ _______              _DOWN__ __UP___ ___K___ ___H___ _COMMA_ __DOT__ _SLASH_ _BSLH__
+	                        __DEL__ __TAB__ _ENTER_ _SPACE_ __ESC__              _ENTER_ _SPACE_ _BKSPC_ __TAB__ _EQUAL_
 			>;
 
 			sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
@@ -193,7 +196,7 @@
 			bindings = <
 	_______ _______ _______ _______ _______ _______                                              _______ _______ __UP___ _______ _______ _______
 	_______ _______ _______ _______ _______ _______                                              _______ _LEFT__ _DOWN__ _RIGHT_ _______ _______
-//  _______ _______ _______ _______ _______ _______ _______ _______              _______ _______ _______ _______ _______ _______ _______ _______
+    _______ _______ _______ _______ _______ _______ _______ _______              _______ _______ _______ _______ _______ _______ _______ _______
 	                        _______ _______ _______ _______ _______              _______ _______ _______ _______ _______
 			>;
 
@@ -203,6 +206,10 @@
 };
 
 
+// _______ _______ _______ _______ _______ _______                                              _______ _______ _______ _______ _______ _______
+// _______ _______ _______ _______ _______ _______                                              _______ _______ _______ _______ _______ _______
+// _______ _______ _______ _______ _______ _______ _______ _______              _______ _______ _______ _______ _______ _______ _______ _______
+//                         _______ _______ _______ _______ _______              _______ _______ _______ _______ _______
 //	&trans &trans &trans &trans &trans &trans                                                &trans &trans &trans &trans &trans &trans
 //	&trans &trans &trans &trans &trans &trans                                                &trans &trans &trans &trans &trans &trans
 //  &trans &trans &trans &trans &trans &trans &trans &trans                        &trans &trans &trans &trans &trans &trans &trans &trans
