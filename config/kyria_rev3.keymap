@@ -9,13 +9,6 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
 
-#define HLHOLD(X) &mt LS(LA(X)) LA(X)
-
-#define DEFAULT 0
-#define HERBST  1
-#define NUM     2
-#define NAV     3
-
 &left_encoder { resolution = <2>; };
 &right_encoder { resolution = <2>; };
 
@@ -107,6 +100,7 @@
     #define _BSLH__ &kp BSLH
     #define __SQT__ &kp SQT
     #define __DEL__ &kp DEL
+    #define _QMARK_ &kp QMARK
 
     #define _LSHFT_ &kp LEFT_SHIFT
     #define _LCTRL_ &kp LEFT_CONTROL
@@ -135,11 +129,38 @@
 
     #define _______ &trans
 
+    #define HE(X) &mt LS(LA(X)) LA(X)
+    #define LAUNCH_ &kp LA(U)
+    #define _SHELL_ &kp LA(RET)
+    #define _QUIT__ &quit
+    #define LAYOUT_ &kp LA(SPACE)
+    #define _FLOAT_ &kp LA(F)
+    #define _LOCK__ &kp LA(P)
+
+    #define MOVE_LE HE(LEFT)
+    #define MOVE_RI HE(RIGHT)
+    #define MOVE_UP HE(UP)
+    #define MOVE_DO HE(DOWN)
+
+    #define RSIZ_LE &kp LA(LC(LEFT))
+    #define RSIZ_RI &kp LA(LC(RIGHT))
+    #define RSIZ_UP &kp LA(LC(UP))
+    #define RSIZ_DO &kp LA(LC(DOWN))
+
+
+    #define SPLIT_H &kp LA(M)
+    #define SPLIT_V &kp LA(COMMA)
+    #define RES_SPL &kp LA(R)
+
+    #define DEFAULT 0
+    #define HERBST  1
+    #define NUM     2
+    #define NAV     3
 
 			bindings = <
 	__ESC__ ___Q___ ___W___ ___F___ ___P___ ___B___                                              ___J___ ___L___ ___U___ ___Y___ _SEMI__ _BSLH__
 	__TAB__ ___A___ ___R___ ___S___ ___T___ ___G___                                              ___M___ ___N___ ___E___ ___I___ ___O___ __SQT__
-    _LSHFT_ ___Z___ ___X___ ___C___ ___D___ ___V___ _LSHFT_ _______              _LSHFT_ _LSHFT_ ___K___ ___H___ _COMMA_ __DOT__ _SLASH_ _RCTRL_
+    _LSHFT_ ___Z___ ___X___ ___C___ ___D___ ___V___ _LSHFT_ _______              _LSHFT_ _LSHFT_ ___K___ ___H___ _COMMA_ __DOT__ _SLASH_ _QMARK_
 	                        _______ __DEL__ _ENTER_ _SPACE_ __ESC__              _ENTER_ _SPACE_ _BKSPC_ __TAB__ _RALT__
 			>;
 
@@ -148,10 +169,10 @@
 
 		herbst_layer {
 			bindings = <
-	&bt BT_SEL 0 HLHOLD(F5) HLHOLD(F4) HLHOLD(F3) HLHOLD(F2) HLHOLD(F1)                                   &quit &kp LA(U) HLHOLD(UP) &kp LA(SPACE) &kp LA(F) &kp LA(P)
-	&bt BT_SEL 1 HLHOLD(N5) HLHOLD(N4) HLHOLD(N3) HLHOLD(N2) HLHOLD(N1)                                   &kp LA(RET) HLHOLD(LEFT) HLHOLD(DOWN) HLHOLD(RIGHT) &kp LA(LC(LEFT)) &kp LA(LC(RIGHT))
-    &bt BT_SEL 2 HLHOLD(F12) HLHOLD(F11) HLHOLD(F10) HLHOLD(Y) HLHOLD(Y) HLHOLD(O) &trans   &trans &trans &kp LA(R) &kp LA(M) &kp LA(COMMA)  &trans &kp LA(LC(UP)) &kp LA(LC(DOWN))
-                       &trans &trans &trans &trans &trans                                &trans &trans &trans &trans &trans
+	_BT_00_ HE( F5) HE( F4) HE( F3) HE( F2) HE( F1)                                              _QUIT__ LAUNCH_ MOVE_UP LAYOUT_ _FLOAT_ _LOCK__
+	_BT_01_ HE( N5) HE( N4) HE( N3) HE( N2) HE( N1)                                              _SHELL_ MOVE_LE MOVE_DO MOVE_RI RSIZ_LE RSIZ_RI
+    _BT_02_ HE(F12) HE(F11) HE(F10) HE(  Y) HE(  Y) _______ _______              _______ _______ RES_SPL SPLIT_H SPLIT_V _______ RSIZ_DO RSIZ_UP
+                            _______ _______ _______ _______ _______              _______ _______ _______ _______ _______
 			>;
 
 			sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
@@ -159,10 +180,10 @@
 
 		num_layer {
 			bindings = <
-	&trans &trans &trans &trans &trans &trans                                                &trans  &kp N7 &kp N8 &kp N9 &trans &trans
-	&trans &trans &trans &trans &trans &trans                                                &trans  &kp N4 &kp N5 &kp N6 &trans &trans
-    &trans &trans &trans &trans &trans &trans &trans &trans                        &trans &trans &kp N0 &kp N1 &kp N2 &kp N3 &trans &trans
-	                  &trans &trans &trans &trans &trans                        &trans &trans &trans &trans &trans
+	_______ _______ _______ _______ _______ _______                                              _______ ___7___ ___8___ ___9___ _______ _______
+	_______ _______ _______ _______ _______ _______                                              _______ ___4___ ___5___ ___6___ _______ _______
+    _______ _______ _______ _______ _______ _______ _______ _______              _______ _______ ___0___ ___1___ ___2___ ___3___ _______ _______
+	                        _______ _______ _______ _______ _______              _______ _______ _______ _______ _______
 			>;
 
 			sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
@@ -170,10 +191,10 @@
 
 		nav_layer {
 			bindings = <
-	&trans &trans &trans &trans &trans &trans                                                &trans  &trans &kp UP &trans &trans &trans
-	&trans &trans &trans &trans &trans &trans                                                &trans  &kp LEFT &kp DOWN &kp RIGHT &trans &trans
-//  &trans &trans &trans &trans &trans &trans &trans &trans                        &trans &trans &trans &trans &trans &trans &trans &trans
-	                  &trans &trans &trans &trans &trans                        &trans &trans &trans &trans &trans
+	_______ _______ _______ _______ _______ _______                                              _______ _______ __UP___ _______ _______ _______
+	_______ _______ _______ _______ _______ _______                                              _______ _LEFT__ _DOWN__ _RIGHT_ _______ _______
+//  _______ _______ _______ _______ _______ _______ _______ _______              _______ _______ _______ _______ _______ _______ _______ _______
+	                        _______ _______ _______ _______ _______              _______ _______ _______ _______ _______
 			>;
 
 			sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
