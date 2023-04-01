@@ -41,6 +41,115 @@ ZMK_BEHAVIOR(hmr, hold_tap,
 )
 
 #include "combos.dtsi"
+#define _LEFT__ &kp LEFT
+#define __UP___ &kp UP
+#define _DOWN__ &kp DOWN
+#define _RIGHT_ &kp RIGHT
+
+#define _SPACE_ &lt HERBST SPACE
+#define __TAB__ &kp TAB
+#define _ENTER_ &lt NUM RET
+#define _BKSPC_ &kp BACKSPACE
+#define __DEL__ &kp DEL
+#define __ESC__ &lt NAV ESC
+
+#define ___A___ &hml LGUI A
+#define ___B___ &kp B
+#define ___C___ &kp C
+#define ___D___ &kp D
+#define ___E___ &hmr LSHFT E
+#define ___F___ &kp F
+#define ___G___ &kp G
+#define ___H___ &kp H
+#define ___I___ &hmr RALT I
+#define ___J___ &kp J
+#define ___K___ &kp K
+#define ___L___ &kp L
+#define ___M___ &kp M
+#define ___N___ &hmr RCTRL N
+#define ___O___ &hmr RGUI  O
+#define ___P___ &kp P
+#define ___Q___ &kp Q
+#define ___R___ &hml LALT R
+#define ___S___ &hml LSHFT S
+#define ___T___ &hml LCTRL T
+#define ___U___ &kp U
+#define ___V___ &kp V
+#define ___W___ &kp W
+#define ___X___ &kp X
+#define ___Y___ &kp Y
+#define ___Z___ &kp Z
+
+#define _COMMA_ &kp COMMA
+#define __DOT__ &kp DOT
+#define _MINUS_ &kp MINUS
+#define _SLASH_ &kp SLASH
+
+
+#define _SEMI__ &kp SEMI
+#define _EQUAL_ &kp EQUAL
+#define _BSLH__ &kp BSLH
+#define __SQT__ &kp SQT
+#define __DEL__ &kp DEL
+
+#define _PARENT &morph_parent
+#define _BRACKT &morph_bracket
+#define _BRACE_ &morph_brace
+
+#define _LSHFT_ &kp LEFT_SHIFT
+#define _LCTRL_ &kp LEFT_CONTROL
+#define _LALT__ &kp LEFT_ALT
+#define _LCMD__ &kp LEFT_COMMAND
+#define _RSHFT_ &kp RIGHT_SHIFT
+#define _RCTRL_ &kp RIGHT_CONTROL
+#define _RALT__ &kp RIGHT_ALT
+#define _RCMD__ &kp RIGHT_COMMAND
+
+#define ___0___ &kp N0
+#define ___1___ &kp N1
+#define ___2___ &kp N2
+#define ___3___ &kp N3
+#define ___4___ &kp N4
+#define ___5___ &kp N5
+#define ___6___ &kp N6
+#define ___7___ &kp N7
+#define ___8___ &kp N8
+#define ___9___ &kp N9
+
+#define _BTCLR_ &bt BT_CLR
+#define _BT_00_ &bt BT_SEL 0
+#define _BT_01_ &bt BT_SEL 1
+#define _BT_02_ &bt BT_SEL 2
+
+#define _______ &trans
+
+#define HE(X) &mt LS(LA(X)) LA(X)
+#define LAUNCH_ &kp LA(U)
+#define _SHELL_ &kp LA(RET)
+#define _QUIT__ &quit
+#define LAYOUT_ &kp LA(SPACE)
+#define _FLOAT_ &kp LA(F)
+#define _LOCK__ &kp LA(P)
+
+#define MOVE_LE HE(LEFT)
+#define MOVE_RI HE(RIGHT)
+#define MOVE_UP HE(UP)
+#define MOVE_DO HE(DOWN)
+
+#define RSIZ_LE &kp LA(LC(LEFT))
+#define RSIZ_RI &kp LA(LC(RIGHT))
+#define RSIZ_UP &kp LA(LC(UP))
+#define RSIZ_DO &kp LA(LC(DOWN))
+
+
+#define SPLIT_H &kp LA(M)
+#define SPLIT_V &kp LA(COMMA)
+#define RES_SPL &kp LA(R)
+
+#define DEFAULT 0
+#define HERBST  1
+#define NUM     2
+#define NAV     3
 / {
     behaviors {
         #include "mod_morph.dtsi"
@@ -58,128 +167,6 @@ ZMK_BEHAVIOR(hmr, hold_tap,
 		compatible = "zmk,keymap";
 
 		default_layer {
-// ---------------------------------------------------------------------------------------------------------------------------------
-// |  ESC  |  Q  |  W  |  E   |  R   |  T   |                                          |  Y   |  U    |  I    |  O   |   P   |   \  |
-// |  TAB  |  A  |  S  |  D   |  F   |  G   |                                          |  H   |  J    |  K    |  L   |   ;   |   '  |
-// | SHIFT |  Z  |  X  |  C   |  V   |  B   | L SHIFT | L SHIFT |  | L SHIFT | L SHIFT |  N   |  M    |  ,    |  .   |   /   | CTRL |
-//                     | GUI  | DEL  | RET  |  SPACE  |   ESC   |  |   RET   |  SPACE  | TAB  | BSPC  | R-ALT |
-			//bindings = <
-	//&kp ESC   &kp Q &kp W &kp E &kp R &kp T                                                &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSLH
-	//&kp TAB   &kp A &kp S &kp D &kp F &kp G                                                &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-	//&kp LSHFT &kp Z &kp X &kp C &kp V &kp B &kp LSHFT &kp LSHFT        &kp LSHFT &kp LSHFT &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp RCTRL
-	                 //&kp LGUI &kp DEL &kp RET &kp SPACE &kp ESC        &kp RET  &kp SPACE  &kp TAB &kp BSPC &kp RALT
-			//>;
-
-    #define _LEFT__ &kp LEFT
-    #define __UP___ &kp UP
-    #define _DOWN__ &kp DOWN
-    #define _RIGHT_ &kp RIGHT
-
-    #define _SPACE_ &lt HERBST SPACE
-    #define __TAB__ &kp TAB
-    #define _ENTER_ &lt NUM RET
-    #define _BKSPC_ &kp BACKSPACE
-    #define __DEL__ &kp DEL
-    #define __ESC__ &lt NAV ESC
-
-    #define ___A___ &hml LGUI A
-    #define ___B___ &kp B
-    #define ___C___ &kp C
-    #define ___D___ &kp D
-    #define ___E___ &hmr LSHFT E
-    #define ___F___ &kp F
-    #define ___G___ &kp G
-    #define ___H___ &kp H
-    #define ___I___ &hmr RALT I
-    #define ___J___ &kp J
-    #define ___K___ &kp K
-    #define ___L___ &kp L
-    #define ___M___ &kp M
-    #define ___N___ &hmr RCTRL N
-    #define ___O___ &hmr RGUI  O
-    #define ___P___ &kp P
-    #define ___Q___ &kp Q
-    #define ___R___ &hml LALT R
-    #define ___S___ &hml LSHFT S
-    #define ___T___ &hml LCTRL T
-    #define ___U___ &kp U
-    #define ___V___ &kp V
-    #define ___W___ &kp W
-    #define ___X___ &kp X
-    #define ___Y___ &kp Y
-    #define ___Z___ &kp Z
-
-    #define _COMMA_ &kp COMMA
-    #define __DOT__ &kp DOT
-    #define _MINUS_ &kp MINUS
-    #define _SLASH_ &kp SLASH
-
-
-    #define _SEMI__ &kp SEMI
-    #define _EQUAL_ &kp EQUAL
-    #define _BSLH__ &kp BSLH
-    #define __SQT__ &kp SQT
-    #define __DEL__ &kp DEL
-
-    #define _PARENT &morph_parent
-    #define _BRACKT &morph_bracket
-    #define _BRACE_ &morph_brace
-
-    #define _LSHFT_ &kp LEFT_SHIFT
-    #define _LCTRL_ &kp LEFT_CONTROL
-    #define _LALT__ &kp LEFT_ALT
-    #define _LCMD__ &kp LEFT_COMMAND
-    #define _RSHFT_ &kp RIGHT_SHIFT
-    #define _RCTRL_ &kp RIGHT_CONTROL
-    #define _RALT__ &kp RIGHT_ALT
-    #define _RCMD__ &kp RIGHT_COMMAND
-
-    #define ___0___ &kp N0
-    #define ___1___ &kp N1
-    #define ___2___ &kp N2
-    #define ___3___ &kp N3
-    #define ___4___ &kp N4
-    #define ___5___ &kp N5
-    #define ___6___ &kp N6
-    #define ___7___ &kp N7
-    #define ___8___ &kp N8
-    #define ___9___ &kp N9
-
-    #define _BTCLR_ &bt BT_CLR
-    #define _BT_00_ &bt BT_SEL 0
-    #define _BT_01_ &bt BT_SEL 1
-    #define _BT_02_ &bt BT_SEL 2
-
-    #define _______ &trans
-
-    #define HE(X) &mt LS(LA(X)) LA(X)
-    #define LAUNCH_ &kp LA(U)
-    #define _SHELL_ &kp LA(RET)
-    #define _QUIT__ &quit
-    #define LAYOUT_ &kp LA(SPACE)
-    #define _FLOAT_ &kp LA(F)
-    #define _LOCK__ &kp LA(P)
-
-    #define MOVE_LE HE(LEFT)
-    #define MOVE_RI HE(RIGHT)
-    #define MOVE_UP HE(UP)
-    #define MOVE_DO HE(DOWN)
-
-    #define RSIZ_LE &kp LA(LC(LEFT))
-    #define RSIZ_RI &kp LA(LC(RIGHT))
-    #define RSIZ_UP &kp LA(LC(UP))
-    #define RSIZ_DO &kp LA(LC(DOWN))
-
-
-    #define SPLIT_H &kp LA(M)
-    #define SPLIT_V &kp LA(COMMA)
-    #define RES_SPL &kp LA(R)
-
-    #define DEFAULT 0
-    #define HERBST  1
-    #define NUM     2
-    #define NAV     3
-
 			bindings = <
 	_BRACKT ___Q___ ___W___ ___F___ ___P___ ___B___                                              ___J___ ___L___ ___U___ ___Y___ _MINUS_ __SQT__
 	_PARENT ___A___ ___R___ ___S___ ___T___ ___G___                                              ___M___ ___N___ ___E___ ___I___ ___O___ _SEMI__
