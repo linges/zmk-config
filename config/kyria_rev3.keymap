@@ -150,6 +150,7 @@ ZMK_BEHAVIOR(hmr, hold_tap,
 #define HERBST  1
 #define NUM     2
 #define NAV     3
+
 / {
     behaviors {
         #include "mod_morph.dtsi"
@@ -161,63 +162,49 @@ ZMK_BEHAVIOR(hmr, hold_tap,
             bindings = <&kp LC(C)>, <&kp LA(LS(C))>;
         };
     };
-
-
-	keymap {
-		compatible = "zmk,keymap";
-
-		default_layer {
-			bindings = <
+};
+ZMK_LAYER(base,
 	_BRACKT ___Q___ ___W___ ___F___ ___P___ ___B___                                              ___J___ ___L___ ___U___ ___Y___ _MINUS_ __SQT__
 	_PARENT ___A___ ___R___ ___S___ ___T___ ___G___                                              ___M___ ___N___ ___E___ ___I___ ___O___ _SEMI__
-    _BRACE_ ___Z___ ___X___ ___C___ ___D___ ___V___ _LSHFT_ _______              _DOWN__ __UP___ ___K___ ___H___ _COMMA_ __DOT__ _SLASH_ _BSLH__
-	                        __DEL__ __TAB__ _ENTER_ _SPACE_ __ESC__              _ENTER_ _SPACE_ _BKSPC_ __TAB__ _EQUAL_
-			>;
+    _BRACE_ ___Z___ ___X___ ___C___ ___D___ ___V___ _LSHFT_ _______  _DOWN__ __UP___ ___K___ ___H___ _COMMA_ __DOT__ _SLASH_ _BSLH__
+	                        __DEL__ __TAB__ _ENTER_ _SPACE_ __ESC__  _ENTER_ _SPACE_ _BKSPC_ __TAB__ _EQUAL_
+    ,
+    &inc_dec_kp C_VOL_DN C_VOL_UP
+)
 
-			sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
-		};
+ZMK_LAYER(herbst_layer,
+	_BT_00_ HE( F5) HE( F4) HE( F3) HE( F2) HE( F1)                                  _QUIT__ LAUNCH_ MOVE_UP LAYOUT_ _FLOAT_ _LOCK__
+	_BT_01_ HE( N5) HE( N4) HE( N3) HE( N2) HE( N1)                                  _SHELL_ MOVE_LE MOVE_DO MOVE_RI RSIZ_LE RSIZ_RI
+    _BT_02_ HE(F12) HE(F11) HE(F10) HE(  O) HE(  Y) _______ _______  _______ _______ RES_SPL SPLIT_H SPLIT_V _______ RSIZ_DO RSIZ_UP
+                            _______ _______ _______ _______ _______  _______ _______ _______ _______ _______
+    ,
+    &inc_dec_kp C_VOL_DN C_VOL_UP
+)
 
-		herbst_layer {
-			bindings = <
-	_BT_00_ HE( F5) HE( F4) HE( F3) HE( F2) HE( F1)                                              _QUIT__ LAUNCH_ MOVE_UP LAYOUT_ _FLOAT_ _LOCK__
-	_BT_01_ HE( N5) HE( N4) HE( N3) HE( N2) HE( N1)                                              _SHELL_ MOVE_LE MOVE_DO MOVE_RI RSIZ_LE RSIZ_RI
-    _BT_02_ HE(F12) HE(F11) HE(F10) HE(  O) HE(  Y) _______ _______              _______ _______ RES_SPL SPLIT_H SPLIT_V _______ RSIZ_DO RSIZ_UP
-                            _______ _______ _______ _______ _______              _______ _______ _______ _______ _______
-			>;
+ZMK_LAYER(num_layer,
+	_______ _______ _______ _______ _______ _______                                  _______ ___7___ ___8___ ___9___ _______ _______
+	_______ _______ _______ _______ _______ _______                                  _______ ___4___ ___5___ ___6___ _______ _______
+    _______ _______ _______ _______ _______ _______ _______ _______  _______ _______ ___0___ ___1___ ___2___ ___3___ _______ _______
+	                        _______ _______ _______ _______ _______  _______ _______ _______ _______ _______
+    ,
+    &inc_dec_kp C_VOL_DN C_VOL_UP
+)
 
-			sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
-		};
-
-		num_layer {
-			bindings = <
-	_______ _______ _______ _______ _______ _______                                              _______ ___7___ ___8___ ___9___ _______ _______
-	_______ _______ _______ _______ _______ _______                                              _______ ___4___ ___5___ ___6___ _______ _______
-    _______ _______ _______ _______ _______ _______ _______ _______              _______ _______ ___0___ ___1___ ___2___ ___3___ _______ _______
-	                        _______ _______ _______ _______ _______              _______ _______ _______ _______ _______
-			>;
-
-			sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
-		};
-
-		nav_layer {
-			bindings = <
-	_______ _______ _______ _______ _______ _______                                              _______ _______ __UP___ _______ _______ _______
-	_______ _______ _______ _______ _______ _______                                              _______ _LEFT__ _DOWN__ _RIGHT_ _______ _______
-    _______ _______ _______ _______ _______ _______ _______ _______              _______ _______ _______ _______ _______ _______ _______ _______
-	                        _______ _______ _______ _______ _______              _______ _______ _______ _______ _______
-			>;
-
-			sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
-		};
-	};
-};
+ZMK_LAYER(nav_layer,
+	_______ _______ _______ _______ _______ _______                                  _______ _______ __UP___ _______ _______ _______
+	_______ _______ _______ _______ _______ _______                                  _______ _LEFT__ _DOWN__ _RIGHT_ _______ _______
+    _______ _______ _______ _______ _______ _______ _______ _______  _______ _______ _______ _______ _______ _______ _______ _______
+	                        _______ _______ _______ _______ _______  _______ _______ _______ _______ _______
+    ,
+    &inc_dec_kp C_VOL_DN C_VOL_UP
+)
 
 
-// _______ _______ _______ _______ _______ _______                                              _______ _______ _______ _______ _______ _______
-// _______ _______ _______ _______ _______ _______                                              _______ _______ _______ _______ _______ _______
-// _______ _______ _______ _______ _______ _______ _______ _______              _______ _______ _______ _______ _______ _______ _______ _______
-//                         _______ _______ _______ _______ _______              _______ _______ _______ _______ _______
-//	&trans &trans &trans &trans &trans &trans                                                &trans &trans &trans &trans &trans &trans
-//	&trans &trans &trans &trans &trans &trans                                                &trans &trans &trans &trans &trans &trans
-//  &trans &trans &trans &trans &trans &trans &trans &trans                        &trans &trans &trans &trans &trans &trans &trans &trans
-//                    &trans &trans &trans &trans &trans                        &trans &trans &trans &trans &trans
+// _______ _______ _______ _______ _______ _______                                  _______ _______ _______ _______ _______ _______
+// _______ _______ _______ _______ _______ _______                                  _______ _______ _______ _______ _______ _______
+// _______ _______ _______ _______ _______ _______ _______ _______  _______ _______ _______ _______ _______ _______ _______ _______
+//                         _______ _______ _______ _______ _______  _______ _______ _______ _______ _______
+//	&trans &trans &trans &trans &trans &trans                                    &trans &trans &trans &trans &trans &trans
+//	&trans &trans &trans &trans &trans &trans                                    &trans &trans &trans &trans &trans &trans
+//  &trans &trans &trans &trans &trans &trans &trans &trans            &trans &trans &trans &trans &trans &trans &trans &trans
+//                    &trans &trans &trans &trans &trans            &trans &trans &trans &trans &trans
