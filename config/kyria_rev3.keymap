@@ -1,9 +1,3 @@
-/*
- * Copyright (c) 2020 The ZMK Contributors
- *
- * SPDX-License-Identifier: MIT
- */
-
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
@@ -12,41 +6,242 @@
 #include "../../zmk-nodefree-config/international_chars/german.dtsi"
 #include "keypos_50keys.h"
 
+#define DEF 0
+#define HER 1
+#define NUM 2
+#define NAV 3
+
+// unused
+#define FN 4
+#define SYS 5
+#define UC 6
+#define MOUSE 7
+
+#include "combos.dtsi"  // requires layer aliases
+
+/* Global settings */
+
+#define QUICK_TAP_MS 175
+
+&sk {  // sticky-key config
+    release-after-ms = <600>;  // release after 0.6s
+    quick-release;             // no double capitalization when rolling keys
+};
+
+&sl {  // sticky-layer config
+    ignore-modifiers;          // allow chording sticky mods & layers
+};
+
+&lt {  // layer-tap config
+    flavor = "balanced";
+    tapping-term-ms = <200>;
+    quick-tap-ms = <QUICK_TAP_MS>;
+};
+
 &left_encoder { resolution = <2>; };
 &right_encoder { resolution = <2>; };
+
+
+/* Homerow mods */
 
 #define KEYS_L LT0 LT1 LT2 LT3 LT4 LT5 LM0 LM1 LM2 LM3 LM4 RM5 LB0 LB1 LB2 LB3 LB4 LB5 // left-hand keys
 #define KEYS_R RT0 RT1 RT2 RT3 RT4 RT5 RM0 RM1 RM2 RM3 RM4 RM5 RB0 RB1 RB2 RB3 RB4 LB5 // right-hand keys
 #define THUMBS LH6 LH5 LH4 LH3 LH2 LH1 LH0 RH0 RH1 RH2 RH3 RH4 RH5 RH6
 
-ZMK_BEHAVIOR(hml, hold_tap,
+#define MAKE_HRM(NAME, HOLD, TAP, TRIGGER_POS) \
+    ZMK_BEHAVIOR(NAME, hold_tap, \
+        flavor = "balanced"; \
+        tapping-term-ms = <280>; \
+        quick-tap-ms = <QUICK_TAP_MS>; \
+        global-quick-tap-ms = <150>; \
+        bindings = <HOLD>, <TAP>; \
+        hold-trigger-key-positions = <TRIGGER_POS>; \
+        hold-trigger-on-release; \
+    )
+MAKE_HRM(hml, &kp, &kp, KEYS_R THUMBS)  // left-hand HRMs
+MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS)  // right-hand HRMs
+MAKE_HRM(hml_repeat, &kp, &key_repeat, KEYS_R THUMBS)  // left-hand HRM for repeat combo
+
+/* Nav cluster */
+
+// long-tap action on hold, short-tap action on all interrupts
+#define MT_CORE \
+    flavor = "tap-preferred"; \
+    tapping-term-ms = <220>; \
+    quick-tap-ms = <220>; \
+    hold-trigger-key-positions = <0>;
+
+&mt { MT_CORE };
+ZMK_BEHAVIOR(mt_home, hold_tap, bindings = <&masked_home>, <&kp>; MT_CORE)
+ZMK_BEHAVIOR(mt_end,  hold_tap,  bindings = <&masked_end>, <&kp>; MT_CORE)
+
+#define NAV_LEFT  &mt_home 0   LEFT    // tap: left  | long-tap: beginning of line
+#define NAV_RIGHT &mt_end 0    RIGHT   // tap: right | long-tap: end       of line
+#define NAV_UP    &mt LC(HOME) UP      // tap: up    | long-tap: beginning of document
+#define NAV_DOWN  &mt LC(END)  DOWN    // tap: down  | long-tap: end       of document
+#define NAV_BSPC  &mt LC(BSPC) BSPC    // tap: bspc  | long-tap: delete word backward
+#define NAV_DEL   &mt LC(DEL)  DEL     // tap: del   | long-tap: delete word forward
+
+// mask CTRL when holding left/right to avoid accidental jumps to beginning/end of document
+#define MASK_MODS(NAME, MODS, BINDING) \
+    ZMK_BEHAVIOR(NAME, mod_morph, \
+        bindings = <BINDING>, <BINDING>; \
+        mods = <MODS>; \
+    )
+MASK_MODS(masked_home, (MOD_LCTL), &kp HOME)
+MASK_MODS(masked_end,  (MOD_LCTL), &kp END)
+
+/* Caps-word, num-word and smart-mouse */
+
+// tap: sticky-shift | shift + tap/ double-tap: caps-word | hold: shift
+ZMK_BEHAVIOR(smart_shft, mod_morph,
+    bindings = <&sk LSHFT>, <&caps_word>;
+    mods = <(MOD_LSFT)>;
+)
+&caps_word {  // mods deactivate caps-word, requires PR #1441
+    /delete-property/ ignore-modifiers;
+};
+
+// tap: num-word | double-tap: sticky num-layer | hold: num-layer
+#define SMART_NUM &smart_num NUM 0
+ZMK_BEHAVIOR(smart_num, hold_tap,
     flavor = "balanced";
-    tapping-term-ms = <280>;
-    quick-tap-ms = <175>;                // repeat on tap-into-hold
-    global-quick-tap-ms = <150>;         // requires PR #1387
-    bindings = <&kp>, <&kp>;
-    hold-trigger-key-positions = <KEYS_R THUMBS>;
-    hold-trigger-on-release;             // requires PR #1423
+    tapping-term-ms = <200>;
+    quick-tap-ms = <QUICK_TAP_MS>;
+    bindings = <&mo>, <&num_dance>;
+)
+ZMK_BEHAVIOR(num_dance, tap_dance,
+    tapping-term-ms = <200>;
+    bindings = <&num_word>, <&sl NUM>;  // reverse this for sticky-num on single tap
+)
+&num_word {  // num-word, requires PR #1441
+    layers = <NUM>;
+};
+
+// smart-mouse, requires PR #1366
+ZMK_BEHAVIOR(smart_mouse, tri_state,
+    bindings = <&tog MOUSE>, <&none>, <&tog MOUSE>;
+    ignored-key-positions = <LT1 LT3 RT1 RT2 RT3 RM1 RM2 RM3 RH0 RH1>;
+    ignored-layers = <MOUSE>;
 )
 
-/* right-hand HRMs */
-ZMK_BEHAVIOR(hmr, hold_tap,
-    flavor = "balanced";
-    tapping-term-ms = <280>;
-    quick-tap-ms = <175>;                // repeat on tap-into-hold
-    global-quick-tap-ms = <150>;         // requires PR #1387
-    bindings = <&kp>, <&kp>;
-    hold-trigger-key-positions = <KEYS_L THUMBS>;
-    hold-trigger-on-release;             // requires PR #1423
+/* Custom behaviors */
+
+// Alt+Tab swapper, requires PR #1366
+ZMK_BEHAVIOR(swapper, tri_state,
+    bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
+    ignored-key-positions = <LT2>;
 )
 
-#include "combos.dtsi"
-#define _LEFT__ &kp LEFT
-#define __UP___ &kp UP
-#define _DOWN__ &kp DOWN
-#define _RIGHT_ &kp RIGHT
+// Sticky layer + sticky shift (workaround for issue #1421)
+ZMK_BEHAVIOR(sls, sticky_key,
+    release-after-ms = <1000>;
+    bindings = <&uc_shift>;
+    ignore-modifiers;
+)
+ZMK_BEHAVIOR(uc_shift, macro,
+    wait-ms = <0>;
+    tap-ms = <1>;
+    bindings = <&macro_press &mo UC &kp LSHFT>
+             , <&macro_pause_for_release>
+             , <&macro_release &mo UC &kp LSHFT>;
+)
 
-#define _SPACE_ &lt HERBST SPACE
+// tap: comma | shift + tap: semicolon | ctrl + shift + tap: <
+ZMK_BEHAVIOR(comma_morph, mod_morph,
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+    bindings = <&kp COMMA>, <&comma_inner_morph>;
+)
+ZMK_BEHAVIOR(comma_inner_morph, mod_morph,
+    bindings = <&kp SEMICOLON>, <&kp LESS_THAN>;
+    mods = <(MOD_LCTL|MOD_RCTL)>;
+)
+
+// tap: dot | shift + tap: colon | ctrl + shift + tap: >
+ZMK_BEHAVIOR(dot_morph, mod_morph,
+    bindings = <&kp DOT>, <&dot_inner_morph>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+ZMK_BEHAVIOR(dot_inner_morph, mod_morph,
+    bindings = <&kp COLON>, <&kp GREATER_THAN>;
+    mods = <(MOD_LCTL|MOD_RCTL)>;
+)
+
+// tap: qmark | shift + tap: excl
+ZMK_BEHAVIOR(qexcl, mod_morph,
+    bindings = <&kp QMARK>, <&kp EXCL>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+
+// tap: space | shift + tap: dot -> space -> sticky shift | hold: activate layer
+ZMK_BEHAVIOR(lt_spc, hold_tap,
+    flavor = "balanced";
+    tapping-term-ms = <200>;
+    quick-tap-ms = <QUICK_TAP_MS>;
+    bindings = <&mo>, <&spc_morph>;
+)
+ZMK_BEHAVIOR(spc_morph, mod_morph,
+    bindings = <&kp SPACE>, <&dot_spc>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+ZMK_BEHAVIOR(dot_spc, macro,
+    wait-ms = <0>;
+    tap-ms = <5>;
+    bindings = <&kp DOT &kp SPACE &sk LSHFT>;
+)
+
+// tap: backspace | lshft + tap: delete | rshft + tap: shift-delete
+ZMK_BEHAVIOR(bs_del, mod_morph,
+    bindings = <&kp BSPC>, <&kp DEL>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+    keep-mods = <MOD_RSFT>;
+)
+
+// tap: copy | double-tap: cut
+ZMK_BEHAVIOR(copy_cut, tap_dance,
+    tapping-term-ms = <200>;
+    bindings = <&kp LC(INS)>, <&kp LC(X)>;
+)
+
+// Windows sleep key
+ZMK_BEHAVIOR(win_sleep, macro,
+    wait-ms = <100>;
+    tap-ms = <5>;
+    bindings = <&kp LG(X) &kp U &kp S>;
+)
+// tap: CTRL-C | doubletap: ALT-SHIFT-C
+ZMK_BEHAVIOR(quit, tap_dance,
+    tapping-term-ms = <200>;
+    bindings = <&kp LC(C)>, <&kp LA(LS(C))>;
+)
+
+ZMK_BEHAVIOR(morph_parent, mod_morph,
+    bindings = <&kp LPAR>, <&kp RPAR>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+ZMK_BEHAVIOR(morph_bracket, mod_morph,
+  bindings = <&kp LBKT>, <&kp RBKT>;
+  mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+ZMK_BEHAVIOR(morph_brace, mod_morph,
+  bindings = <&kp LBRC>, <&kp RBRC>;
+  mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+
+// misc aliases
+#define CANCEL      &kp K_CANCEL             // cancel caps-word, num-word and smart-mouse
+#define DSK_PREV    &hmr RSHFT LG(LC(LEFT))  // previous desktop
+#define DSK_NEXT    &hmr LALT LG(LC(RIGHT))  // next     desktop
+#define VOL_DOWN    &hmr LCTRL C_VOL_DN
+
+/* Keymap */
+
+#define _LEFT__ NAV_LEFT
+#define __UP___ NAV_UP
+#define _DOWN__ NAV_DOWN
+#define _RIGHT_ NAV_RIGHT
+
+#define _SPACE_ &lt HER SPACE
 #define __TAB__ &kp TAB
 #define _ENTER_ &lt NUM RET
 #define _BKSPC_ &kp BACKSPACE
@@ -146,23 +341,6 @@ ZMK_BEHAVIOR(hmr, hold_tap,
 #define SPLIT_V &kp LA(COMMA)
 #define RES_SPL &kp LA(R)
 
-#define DEFAULT 0
-#define HERBST  1
-#define NUM     2
-#define NAV     3
-
-/ {
-    behaviors {
-        #include "mod_morph.dtsi"
-        quit: tap_dance_0 {
-            compatible = "zmk,behavior-tap-dance";
-            label = "TAP_DANCE_0";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp LC(C)>, <&kp LA(LS(C))>;
-        };
-    };
-};
 ZMK_LAYER(base,
 	_BRACKT ___Q___ ___W___ ___F___ ___P___ ___B___                                              ___J___ ___L___ ___U___ ___Y___ _MINUS_ __SQT__
 	_PARENT ___A___ ___R___ ___S___ ___T___ ___G___                                              ___M___ ___N___ ___E___ ___I___ ___O___ _SEMI__
