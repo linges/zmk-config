@@ -326,10 +326,10 @@ ZMK_BEHAVIOR(morph_brace, mod_morph,
 #define _FLOAT_ &kp LA(F)
 #define _LOCK__ &kp LA(P)
 
-#define MOVE_LE HE(LEFT)
-#define MOVE_RI HE(RIGHT)
-#define MOVE_UP HE(UP)
-#define MOVE_DO HE(DOWN)
+#define MOVW_LE HE(LEFT)
+#define MOVW_RI HE(RIGHT)
+#define MOVW_UP HE(UP)
+#define MOVW_DO HE(DOWN)
 
 #define RSIZ_LE &kp LA(LC(LEFT))
 #define RSIZ_RI &kp LA(LC(RIGHT))
@@ -351,8 +351,8 @@ ZMK_LAYER(base,
 )
 
 ZMK_LAYER(herbst_layer,
-	_BT_00_ HE( F5) HE( F4) HE( F3) HE( F2) HE( F1)                                  _QUIT__ LAUNCH_ MOVE_UP LAYOUT_ _FLOAT_ _LOCK__
-	_BT_01_ HE( N5) HE( N4) HE( N3) HE( N2) HE( N1)                                  _SHELL_ MOVE_LE MOVE_DO MOVE_RI RSIZ_LE RSIZ_RI
+	_BT_00_ HE( F5) HE( F4) HE( F3) HE( F2) HE( F1)                                  _QUIT__ LAUNCH_ MOVW_UP LAYOUT_ _FLOAT_ _LOCK__
+	_BT_01_ HE( N5) HE( N4) HE( N3) HE( N2) HE( N1)                                  _SHELL_ MOVW_LE MOVW_DO MOVW_RI RSIZ_LE RSIZ_RI
     _BT_02_ HE(F12) HE(F11) HE(F10) HE(  O) HE(  Y) _______ _______  _______ _______ RES_SPL SPLIT_H SPLIT_V _______ RSIZ_DO RSIZ_UP
                             _______ _______ _______ _______ _______  _______ _______ _______ _______ _______
     ,
