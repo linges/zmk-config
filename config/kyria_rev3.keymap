@@ -3,21 +3,23 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
 #include "../../zmk-nodefree-config/helper.h"
+#define HOST_OS 1  // set to 1 for Linux, default is 0 (Windows)
 #include "../../zmk-nodefree-config/international_chars/german.dtsi"
 #include "keypos_50keys.h"
 
 #define DEF 0
 #define HER 1
-#define NUM 2
-#define NAV 3
+#define NAV 2
+#define NUM 3
+#define UC 4
+#define MOUSE 5
 
 // unused
-#define FN 4
-#define SYS 5
-#define UC 6
-#define MOUSE 7
+#define FN 5
+#define SYS 6
 
 #include "combos.dtsi"  // requires layer aliases
+#include "mouse.dtsi"
 
 /* Global settings */
 
@@ -243,7 +245,7 @@ ZMK_BEHAVIOR(morph_brace, mod_morph,
 
 #define _SPACE_ &lt HER SPACE
 #define __TAB__ &kp TAB
-#define _ENTER_ &lt NUM RET
+#define _ENTER_ &lt NAV RET
 #define _BKSPC_ &kp BACKSPACE
 #define __DEL__ &kp DEL
 #define __ESC__ &lt NAV ESC
@@ -341,11 +343,14 @@ ZMK_BEHAVIOR(morph_brace, mod_morph,
 #define SPLIT_V &kp LA(COMMA)
 #define RES_SPL &kp LA(R)
 
+#define SMA_NUM SMART_NUM
+#define SMA_SHT &smart_shft
+
 ZMK_LAYER(base,
-	_BRACKT ___Q___ ___W___ ___F___ ___P___ ___B___                                              ___J___ ___L___ ___U___ ___Y___ _MINUS_ __SQT__
-	_PARENT ___A___ ___R___ ___S___ ___T___ ___G___                                              ___M___ ___N___ ___E___ ___I___ ___O___ _SEMI__
+	_BRACKT ___Q___ ___W___ ___F___ ___P___ ___B___                                  ___J___ ___L___ ___U___ ___Y___ _MINUS_ __SQT__
+	_PARENT ___A___ ___R___ ___S___ ___T___ ___G___                                  ___M___ ___N___ ___E___ ___I___ ___O___ _SEMI__
     _BRACE_ ___Z___ ___X___ ___C___ ___D___ ___V___ _LSHFT_ _______  _DOWN__ __UP___ ___K___ ___H___ _COMMA_ __DOT__ _SLASH_ _BSLH__
-	                        __DEL__ __TAB__ _ENTER_ _SPACE_ __ESC__  _ENTER_ _SPACE_ _BKSPC_ __TAB__ _EQUAL_
+	                        __DEL__ __TAB__ _ENTER_ _SPACE_ _ENTER_  SMA_NUM SMA_SHT _BKSPC_ __TAB__ _EQUAL_
     ,
     &inc_dec_kp C_VOL_DN C_VOL_UP
 )
@@ -353,8 +358,17 @@ ZMK_LAYER(base,
 ZMK_LAYER(herbst_layer,
 	_BT_00_ HE( F5) HE( F4) HE( F3) HE( F2) HE( F1)                                  _QUIT__ LAUNCH_ MOVW_UP LAYOUT_ _FLOAT_ _LOCK__
 	_BT_01_ HE( N5) HE( N4) HE( N3) HE( N2) HE( N1)                                  _SHELL_ MOVW_LE MOVW_DO MOVW_RI RSIZ_LE RSIZ_RI
-    _BT_02_ HE(F12) HE(F11) HE(F10) HE(  O) HE(  Y) _______ _______  _______ _______ RES_SPL SPLIT_H SPLIT_V _______ RSIZ_DO RSIZ_UP
+    _BT_02_ HE(F12) HE(F11) HE(F10) HE(  O) HE(  Y) _QUIT__ _______  _______ _______ RES_SPL SPLIT_H SPLIT_V _______ RSIZ_DO RSIZ_UP
                             _______ _______ _______ _______ _______  _______ _______ _______ _______ _______
+    ,
+    &inc_dec_kp C_VOL_DN C_VOL_UP
+)
+
+ZMK_LAYER(nav_layer,
+	_______ _______ _______ _______ _______ _______                                  _______ _______ __UP___ _______ _______ _______
+	_______ _______ _______ _______ _______ _______                                  _______ _LEFT__ _DOWN__ _RIGHT_ _______ _______
+    _______ _______ _______ _______ _______ _______ _______ _______  _______ _______ _______ _______ _______ _______ _______ _______
+	                        _______ _______ _______ _______ _______  _______ _______ _______ _______ _______
     ,
     &inc_dec_kp C_VOL_DN C_VOL_UP
 )
@@ -368,11 +382,20 @@ ZMK_LAYER(num_layer,
     &inc_dec_kp C_VOL_DN C_VOL_UP
 )
 
-ZMK_LAYER(nav_layer,
-	_______ _______ _______ _______ _______ _______                                  _______ _______ __UP___ _______ _______ _______
-	_______ _______ _______ _______ _______ _______                                  _______ _LEFT__ _DOWN__ _RIGHT_ _______ _______
+ZMK_LAYER(uc,
+	_______ _______ _______ _______ _______ _______                                  _______ &de_eszett _______ _______ _______ _______
+	_______ _______ _______ _______ _______ _______                                  _______ &de_ae  &de_oe  &de_ue  _______ _______
     _______ _______ _______ _______ _______ _______ _______ _______  _______ _______ _______ _______ _______ _______ _______ _______
 	                        _______ _______ _______ _______ _______  _______ _______ _______ _______ _______
+    ,
+    &inc_dec_kp C_VOL_DN C_VOL_UP
+)
+
+ZMK_LAYER(mouse_layer,
+	_______ _______ _______ _______ _______ _______                                  _______ U_WH_D  U_MS_U  U_WH_U  _______ _______
+	_______ _______ _______ _______ _______ _______                                  _______ U_MS_L  U_MS_D  U_MS_R  _______ _______
+    _______ _______ _______ _______ _______ _______ _______ _______  _______ _______ _______ _______ _______ _______ _______ _______
+	                        _______ _______ _______ _______ _______  U_BTN2  U_BTN1  _______ _______ _______
     ,
     &inc_dec_kp C_VOL_DN C_VOL_UP
 )
