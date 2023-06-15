@@ -13,6 +13,7 @@
 #define NUM 3
 #define UC 4
 #define MOUSE 5
+#define GAME 6
 
 // unused
 #define FN 5
@@ -399,7 +400,16 @@ ZMK_LAYER(mouse_layer,
 	_______ _______ _______ _______ _______ _______                                  _______ U_WH_D  U_MS_U  U_WH_U  _______ _______
 	_______ _______ _______ _______ _______ _______                                  _______ U_MS_L  U_MS_D  U_MS_R  _______ _______
     _______ _______ _______ _______ _______ _______ _______ _______  _______ _______ _______ _______ _______ _______ _______ _______
-	                        _______ _______ _______ _______ _______  U_BTN2  U_BTN1  _______ _______ _______
+	                        _______ _______ _______ _______ _______  U_BTN2  U_BTN1  U_BTN3  _______ _______
+    ,
+    &inc_dec_kp C_VOL_DN C_VOL_UP
+)
+
+ZMK_LAYER(game,
+	__ESC__ ___T___ ___Q___ ___W___ &kp E   &kp R                                    ___Y___ ___U___ &kp I   &kp O   ___P___ __SQT__
+	__TAB__ ___G___ &kp A   &kp S   &kp D   &kp F                                    ___H___ ___J___ ___K___ ___L___ ___O___ _QEXCL_
+    _BKSPC_ ___B___ ___Z___ ___X___ ___C___ ___V___ _LSHFT_ _______  _DOWN__ __UP___ &kp N   ___M___ _COMMA_ __DOT__ _SLASH_  _BSLH__
+	                       &kp LCTRL &kp LGUI &kp LALT _SPACE_ _ENTER_  SMA_NUM SMA_SHT _BKSPC_ __TAB__ _EQUAL_
     ,
     &inc_dec_kp C_VOL_DN C_VOL_UP
 )
