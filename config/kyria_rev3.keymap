@@ -287,6 +287,7 @@ ZMK_BEHAVIOR(morph_brace, mod_morph,
 
 
 #define _SEMI__ &kp SEMI
+#define _PIPE__ &kp PIPE
 #define _EQUAL_ &kp EQUAL
 #define _BSLH__ &kp BSLH
 #define __SQT__ &kp SQT
@@ -352,8 +353,8 @@ ZMK_BEHAVIOR(morph_brace, mod_morph,
 #define SMA_SHT &smart_shft
 
 ZMK_LAYER(base,
-	_EXCL__ ___Q___ ___W___ ___F___ ___P___ ___B___                                  ___J___ ___L___ ___U___ ___Y___ __SQT__ _MINUS_
-	_PARENT ___A___ ___R___ ___S___ ___T___ ___G___                                  ___M___ ___N___ ___E___ ___I___ ___O___ _QEXCL_
+	__ESC__ ___Q___ ___W___ ___F___ ___P___ ___B___                                  ___J___ ___L___ ___U___ ___Y___ __SQT__ _PIPE__
+	_QEXCL_ ___A___ ___R___ ___S___ ___T___ ___G___                                  ___M___ ___N___ ___E___ ___I___ ___O___ _SEMI__
     _BRACE_ ___Z___ ___X___ ___C___ ___D___ ___V___ _LSHFT_ _______  _DOWN__ __UP___ ___K___ ___H___ _COMMA_ __DOT__ _SLASH_  _BSLH__
 	                        __DEL__ __TAB__ _BKSPC_ _SPACE_ _ENTER_  SMA_NUM SMA_SHT _BKSPC_ __TAB__ _EQUAL_
     ,
@@ -406,9 +407,9 @@ ZMK_LAYER(mouse_layer,
 )
 
 ZMK_LAYER(game,
-	__ESC__ ___T___ ___Q___ ___W___ &kp E   &kp R                                    ___Y___ ___U___ &kp I   &kp O   ___P___ __SQT__
-	__TAB__ ___G___ &kp A   &kp S   &kp D   &kp F                                    ___H___ ___J___ ___K___ ___L___ ___O___ _QEXCL_
-    _BKSPC_ ___B___ ___Z___ ___X___ ___C___ ___V___ _LSHFT_ _______  _DOWN__ __UP___ &kp N   ___M___ _COMMA_ __DOT__ _SLASH_  _BSLH__
+	__ESC__ &kp T ___Q___ ___W___ &kp E   &kp R                                    ___Y___ ___U___ &kp I   &kp O   ___P___   &kp F5
+	__TAB__ ___G___ &kp A   &kp S   &kp D   &kp F                                    ___H___ ___J___ ___K___ ___L___ ___O___ &kp F2
+    _LSHFT_ ___B___ ___Z___ ___X___ ___C___ ___V___ _LSHFT_ _______  _DOWN__ __UP___ &kp N   ___M___ _COMMA_ __DOT__ _SLASH_ &kp F1
 	                       &kp LCTRL &kp LGUI &kp LALT _SPACE_ _ENTER_  SMA_NUM SMA_SHT _BKSPC_ __TAB__ _EQUAL_
     ,
     &inc_dec_kp C_VOL_DN C_VOL_UP
