@@ -92,4 +92,4 @@ ZMK_COMBO(pipe,  &kp PIPE,      RM3 RB3,     DEF NAV NUM, COMBO_TERM_SLOW)
 
 /* both hands */
 ZMK_COMBO(bs_reset, &bt BT_CLR,   LT0 RT0,     HER, COMBO_TERM_SLOW)
-ZMK_COMBO(game_mod, &tog GAME,   LT5 RT5,     DEF GAME, COMBO_TERM_SLOW)
+ZMK_COMBO(game_mod, &tog GAME,   LT5 LT0,     DEF GAME, COMBO_TERM_SLOW)

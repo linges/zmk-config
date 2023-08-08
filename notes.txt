@@ -1,0 +1,7 @@
+cd app
+
+west build -d build/right -b nice_nano_v2 -- -DSHIELD=kyria_rev3_right -DZMK_CONFIG=/home/fl/work/zmk-config/config
+west build -d build/left -b nice_nano_v2 -- -DSHIELD=kyria_rev3_left -DZMK_CONFIG=/home/fl/work/zmk-config/config
+
+ west build -d build/left && cp build/left/zephyr/zmk.uf2 /media/NICENANO
+
