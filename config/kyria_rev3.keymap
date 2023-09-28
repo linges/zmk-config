@@ -407,10 +407,10 @@ ZMK_LAYER(mouse_layer,
 )
 
 ZMK_LAYER(game,
-	__ESC__ &kp T ___Q___ ___W___ &kp E   &kp R                                    ___Y___ ___U___ &kp I   &kp O   ___P___   &kp F5
+  &kp ESC &kp T ___Q___ ___W___ &kp E   &kp R                                    ___Y___ ___U___ &kp I   &kp O   ___P___   &kp F5
 	__TAB__ ___G___ &kp A   &kp S   &kp D   &kp F                                    ___H___ ___J___ ___K___ ___L___ ___O___ &kp F2
-    _LSHFT_ ___B___ ___Z___ ___X___ ___C___ ___V___ _LSHFT_ _______  _DOWN__ __UP___ &kp N   ___M___ _COMMA_ __DOT__ _SLASH_ &kp F1
-	                       &kp LCTRL &kp LGUI &kp LALT _SPACE_ _ENTER_  SMA_NUM SMA_SHT _BKSPC_ __TAB__ _EQUAL_
+  &kp LEFT_SHIFT ___B___ ___Z___ ___X___ ___C___ ___V___ _BKSPC_ &kp LEFT_SHIFT  _DOWN__ __UP___ &kp N   ___M___ _COMMA_ __DOT__ _SLASH_ &kp F1
+	                      &kp LGUI &kp LCTRL &kp LALT &kp SPACE &kp RET  SMA_NUM SMA_SHT _BKSPC_ __TAB__ _EQUAL_
     ,
     &inc_dec_kp C_VOL_DN C_VOL_UP
 )
